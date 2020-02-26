@@ -1,0 +1,11 @@
+* {
+    font-size: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.titulo {
+    padding: 20px;
+    text-align: center;
+}
+
