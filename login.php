@@ -1,5 +1,7 @@
 <?php 
 session_start();
+
+
 if(isset($_POST['logar'])){
   $erro = [];
 
@@ -12,7 +14,16 @@ if(isset($_POST['logar'])){
   if(empty($_POST['senha'])) {
     $erro[] = $_SESSION['vazioSenha'] = "Complete sua senha";
   }
+
+  if ($_POST) {
+    $usuariosJson = file_get_contents('./includes/usuarios.json');      
+    $arrayUsuarios = json_decode($usuariosJson, true);    
+  }             
+ 
 }
+
+
+
 
 
 
@@ -66,7 +77,7 @@ if(isset($_POST['logar'])){
 
 
     <div id="formFooter">
-      <a class="underlineHover" href="#">Ainda não tenho cadastro</a>
+      <a class="underlineHover" href="createUsuario.php">Ainda não tenho cadastro</a>
     </div>
 
   </div>

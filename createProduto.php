@@ -11,7 +11,9 @@
     <title>Produtos</title>
 </head>
 <body>
-
+<?php 
+ include 'menu.php';
+?>
     <h1 class="titulo">Adicionar produto</h1>
 <form action="enviar.php" method="post" enctype="multipart/form-data">
     <div class="container">

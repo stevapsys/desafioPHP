@@ -1,3 +1,15 @@
+<?php
+
+    //session_start(); 
+    
+    //if(!isset($_SESSION['usuario'])) {
+	//	header('Location: login.php');
+	//}
+
+
+    ?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -30,11 +42,12 @@
             </tr>
         </thead>
             <tbody>
+
                 <tr>
                     <td class="border"d>1</td>
-                    <td class="border"> Nome </td>
-                    <td class="border"> Descrição</td>
-                    <td class="border"> R$ </td>
+                    <td class="border"></td>
+                    <td class="border"> </td>
+                    <td class="border"> $ </td>
                     <td class="border">
                         <button type="button" class="btn btn-info">Editar</button>
                         <button type="button" class="btn btn-danger">Excluir</button>

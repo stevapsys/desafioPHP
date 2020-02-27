@@ -20,12 +20,13 @@ if(empty($_POST['nome'])) {
     $erro[] = $_SESSION['vazioSenha'] = 'Sua senha deve possuir no mínimo 6 caracteres!';
     }
 
-    $senhaConfirma  = $_POST['senhaConfirma'];
-    if($senhaConfirma !== $senha){
-        $erro[] = $_SESSION['vazioSenhaConfirma'] = 'As senhas não conferem!';   
-    }
-
+    $senhaConf = $_POST['senhaConfirma'];
+    if ($senha != $senhaConf) {
+        $erros['vazioSenhaConfirma'] = "A confirmação de senha não confere.";
+    } 
 }
+
+
 // criptografando senha
 $hash = password_hash($senha, PASSWORD_DEFAULT);
 
@@ -36,12 +37,40 @@ $novoUsuario = [
     'senha' => $hash
 ];
 
+if (empty($erros)) {
+    fopen('usuarios.json', 'a+');
 // adicionando usuario
-$arrayUsuarios[] = $novoUsuario;
+    $arrayUsuarios[] = $novoUsuario;
 // transformar array em json
-$novoUsuarioJson = json_encode($arrayUsuarios);
+    $novoUsuarioJson = json_encode($arrayUsuarios);
 // salvar json no arquivo
-file_put_contents('./includes/usuarios.json', $novoUsuarioJson);
+    file_put_contents('./includes/usuarios.json', $novoUsuarioJson);
+//criando id
+
+    $id['id'] = id($arrayUsuarios);
+    $usuariosarray[] = $id;
+    }
+
+
+//transformando o json em array
+function usuarioNovo() {
+    $usuarios = file_get_contents('./includes/usuarios.json' ); 
+    $arrayUsuarios = json_decode($usuarios, true);
+    return $usuarios;
+}
+
+//criando id
+function id($arrayUsuarios)
+{
+    $posicao = (count($arrayUsuarios) - 1);
+    if ($posicao >= 0) {
+        $ultimo_id = $arrayUsuarios[$posicao]['id'];
+        return $ultimo_id + 1;
+    } else {
+        return 1;
+    }
+}
+
 
 ?>
 
@@ -82,7 +111,7 @@ file_put_contents('./includes/usuarios.json', $novoUsuarioJson);
                                 Editar 
                                 </a>
                                 </button>
-                                <button type="button" class="btn btn-danger">Excluir</button>
+                                <button type="button" class="btn btn-danger" href="deletarUsuario.php?id=<?php echo $user['id']?>">Excluir</button>
                            </form> </div>
                         </td>
                     </tr>
